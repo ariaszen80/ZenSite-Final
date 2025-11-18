@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZenSite Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',sans-serif;}
+body {background:#000;color:#fff;}
+h1,h2,p {text-align:center;}
+h1 {color:#FFD700;margin:30px 0;font-family:'Playfair Display', serif;font-size:3.5em;letter-spacing:2px;}
+h2 {color:#FFD700;margin-bottom:15px;}
+p {margin-bottom:10px;}
+button, .button-primary, .stripe-btn {padding:15px 30px;background:#FFD700;color:#000;border:none;border-radius:5px;font-size:1em;cursor:pointer;transition:0.3s;}
+button:hover, .button-primary:hover, .stripe-btn:hover {background:#FFC700;}
+.page {display:none;opacity:0;transition:opacity 0.5s;}
+.active-page {display:block;opacity:1;}
+
+/* Botón redondo Instagram Página 1 */
+.instagram-btn {
+display:inline-block;
+width:150px;
+height:150px;
+line-height:150px;
+border-radius:50%;
+background:#FFD700;
+color:#000;
+text-align:center;
+font-weight:bold;
+font-size:1.2em;
+text-decoration:none;
+margin-top:30px;
+transition:0.3s, box-shadow 0.6s;
+box-shadow:0 0 20px rgba(255,215,0,0.6), 0 8px 20px rgba(255,215,0,0.5);
+animation: float 3s ease-in-out infinite;
+}
+.instagram-btn:hover {transform:scale(1.1);background:#FFC700;}
+@keyframes float {
+0% {transform:translateY(0);}
+50% {transform:translateY(-10px);}
+100% {transform:translateY(0);}
+}
+
+/* Planes 3D */
+.plans {display:flex;flex-wrap:wrap;justify-content:center;margin:50px 20px;gap:20px;perspective:1000px;}
+.plan {background:#111;border-radius:10px;padding:30px;width:300px;text-align:center;box-shadow:0 8px 25px rgba(255,215,0,0.3);transition:transform 0.6s, box-shadow 0.6s;cursor:pointer;}
+.plan:hover {transform:rotateY(15deg) rotateX(5deg) translateY(-10px) scale(1.05);}
+
+/* Reseñas */
+.reviews {background:#111;color:#FFD700;padding:50px 20px;overflow:hidden;}
+.review-item {min-width:300px;flex-shrink:0;background:rgba(255,215,0,0.1);padding:20px;border-radius:10px;text-align:center;margin:0 auto;opacity:0;transition:opacity 1s;}
+.review-item.active {opacity:1;}
+
+/* Detalle plan */
+.plan-detail {background:#111;border-radius:10px;padding:30px;width:80%;margin:20px auto;text-align:left;box-shadow:0 8px 25px rgba(255,215,0,0.3);}
+</style>
+</head>
+<body>
+
+<!-- ⭐⭐⭐ PÁGINA 1 -->
+<section id="page1" class="page active-page">
+<h1>ZenSite Pro</h1>
+<p>Websites profesionales en 24 horas</p>
+<button class="button-primary" onclick="showPage(2)">Next</button>
+<br><br>
+<a href="https://www.instagram.com/zensitepro" target="_blank" class="instagram-btn">Contacto</a>
+</section>
+
+<!-- ⭐⭐⭐ PÁGINA 2 (Planes + Reseñas) -->
+<section id="page2" class="page">
+<h1>Nuestros Planes</h1>
+<button class="button-primary" onclick="showPage(1)">Volver</button>
+
+<div class="plans">
+<div class="plan" onclick="selectPlan('ZenSite Basic')">
+<h2>ZenSite Basic</h2>
+<p>Landing Page simple</p>
+<p class="price">$60</p>
+</div>
+
+<div class="plan" onclick="selectPlan('ZenSite Avanzado')">
+<h2>ZenSite Avanzado</h2>
+<p>2 – 3 páginas + diseño personalizado</p>
+<p class="price">$120</p>
+</div>
+
+<div class="plan" onclick="selectPlan('ZenSite Profesional')">
+<h2>ZenSite Profesional</h2>
+<p>Website completa + SEO + animaciones</p>
+<p class="price">$200</p>
+</div>
+</div>
+
+<!-- Reseñas -->
+<div class="reviews">
+<h2>Reseñas</h2>
+<div id="reviewCarousel">
+<div class="review-item active">"Excelente servicio!" - María</div>
+<div class="review-item">"Profesionales y rápidos." - Osvaldo</div>
+<div class="review-item">"Mi negocio creció gracias a la web." - Yessika</div>
+<div class="review-item">"Los mejores!" - Carmen</div>
+</div>
+</div>
+</section>
+
+<!-- ⭐⭐⭐ PÁGINA 3 (Detalle del plan) -->
+<section id="page3" class="page">
+<h1>Detalle del Plan</h1>
+<button class="button-primary" onclick="showPage(2)">Volver</button>
+
+<div id="planDetailContainer"></div>
+
+<div style="text-align:center;margin-top:20px;">
+<button class="button-primary" onclick="showPage(4)">Continuar</button>
+</div>
+</section>
+
+<!-- ⭐⭐⭐ PÁGINA 4 (JOTFORM) -->
+<section id="page4" class="page">
+<h1>Información del Negocio</h1>
+<button class="button-primary" onclick="showPage(3)">Volver</button>
+
+<div style="max-width:700px;margin:20px auto;background:#111;padding:30px;border-radius:10px;">
+
+<p style="text-align:center;color:#FFD700;font-size:1.2em;margin-bottom:20px;">
+Completa este formulario con la información de tu negocio.
+</p>
+
+<iframe
+    id="JotFormIFrame-253212819257155"
+    title="Información del Negocio"
+    allowtransparency="true"
+    allow="geolocation; microphone; camera"
+    src="https://form.jotform.com/253212819257155"
+    frameborder="0"
+    style="min-width:100%;max-width:100%;height:1000px;border:none;">
+</iframe>
+
+<script>
+window.addEventListener("message", function(e) {
+    if (typeof e.data === 'object' && e.data.height) {
+        document.getElementById("JotFormIFrame-253212819257155").style.height = e.data.height + "px";
+    }
+});
+</script>
+
+<div style="text-align:center;margin-top:20px;">
+<button class="button-primary" onclick="showPage(5)">Ir al Pago</button>
+</div>
+</div>
+</section>
+
+<!-- ⭐⭐⭐ PÁGINA 5 (Pago Stripe) -->
+<section id="page5" class="page">
+<h1>Pago Seguro</h1>
+<button class="button-primary" onclick="showPage(4)">Volver</button>
+
+<div style="max-width:500px;margin:20px auto;background:#111;padding:30px;border-radius:10px;">
+<h2 style="color:#FFD700;text-align:center;margin-bottom:20px;">Pagar tu plan</h2>
+<p style="text-align:center;color:#fff;margin-bottom:20px;">
+Haz clic en el botón para completar tu pago.
+</p>
+
+<a id="stripeLink" href="#" target="_blank" class="stripe-btn" style="display:block;text-align:center;">
+Pagar en Stripe
+</a>
+</div>
+</section>
+
+<footer style="text-align:center;margin-top:50px;color:#777;">© 2024 ZenSite Pro</footer>
+
+<script>
+// Variables
+let selectedPlan = '';
+
+const stripeLinks = {
+"ZenSite Basic": "https://buy.stripe.com/8x2fZa1Dk5Hd40RfakfUQ01",
+"ZenSite Avanzado": "https://buy.stripe.com/5kQfZa4Pw0mT9lbbY8fUQ02",
+"ZenSite Profesional": "https://buy.stripe.com/7sYdR20zgglRapf2nyfUQ03"
+};
+
+function showPage(n){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active-page'));
+document.getElementById('page'+n).classList.add('active-page');
+
+if(n===5){
+document.getElementById('stripeLink').href = stripeLinks[selectedPlan];
+}
+}
+
+function selectPlan(plan){
+selectedPlan = plan;
+
+let html = "";
+if(plan==="ZenSite Basic"){
+html = `<div class="plan-detail">
+<h2>ZenSite Basic</h2>
+<p>Landing Page moderna + contacto</p>
+<p>Entrega 24h</p>
+<p>Precio: $60</p>
+</div>`;
+}
+if(plan==="ZenSite Avanzado"){
+html = `<div class="plan-detail">
+<h2>ZenSite Avanzado</h2>
+<p>2-3 páginas profesionales</p>
+<p>Diseño personalizado</p>
+<p>SEO básico</p>
+<p>Precio: $120</p></div>`;
+}
+if(plan==="ZenSite Profesional"){
+html = `<div class="plan-detail">
+<h2>ZenSite Profesional</h2>
+<p>Website completa con animaciones</p>
+<p>SEO básico</p>
+<p>Hasta 5 páginas</p>
+<p>Precio: $200</p>`;
+}
+
+document.getElementById('planDetailContainer').innerHTML = html;
+showPage(3);
+}
+</script>
+
+</body>
+</html>

@@ -78,12 +78,88 @@ animation: float 3s ease-in-out infinite;
 <p>Landing Page simple</p>
 <p class="price">$60</p>
 </div>
+<!-- ===== Página 2: Carrusel de reseñas ===== -->
+<div id="page2">
+  <h2 style="text-align:center;">Reseñas de ZenSite Pro</h2>
+  <p style="text-align:center;">Creación de websites profesionales, rápidas y optimizadas.</p>
 
-<div class="plan" onclick="selectPlan('ZenSite Avanzado')">
-<h2>ZenSite Avanzado</h2>
-<p>2 – 3 páginas + diseño personalizado</p>
-<p class="price">$120</p>
+  <!-- Carrusel -->
+  <div id="testimonials-container"></div>
 </div>
+
+<!-- ===== CSS del carrusel ===== -->
+<style>
+  #testimonials-container {
+    width: 100%;        /* Ocupa todo el ancho del div padre */
+    max-width: 500px;   /* Máximo ancho */
+    height: 120px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+  }
+
+  .testimonial {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .testimonial.active {
+    opacity: 1;
+  }
+</style>
+
+<!-- ===== JavaScript del carrusel ===== -->
+<script>
+  const reviews = [
+    { text: "⭐⭐⭐⭐⭐ Servicio increíble, mi negocio creció al instante.", author: "Carmen" },
+    { text: "⭐⭐⭐⭐⭐ El diseño quedó brutal. Recomendado 100%.", author: "Osvaldo" },
+    { text: "⭐⭐⭐⭐⭐ Me entregaron todo rápido y profesional.", author: "Sheyla" },
+    { text: "⭐⭐⭐⭐⭐ La mejor web que he tenido.", author: "Yessika" },
+    { text: "⭐⭐⭐⭐⭐ Atención perfecta y resultados top.", author: "María" },
+    { text: "⭐⭐⭐⭐⭐ Gran atención y soporte muy rápido.", author: "Daimarian" },
+    { text: "⭐⭐⭐⭐⭐ Superaron mis expectativas totalmente.", author: "Arias" },
+    { text: "⭐⭐⭐⭐⭐ Diseño moderno y profesional.", author: "Maria Tereza" },
+    { text: "⭐⭐⭐⭐⭐ Lo recomiendo a todos mis conocidos.", author: "Carmen S." },
+    { text: "⭐⭐⭐⭐⭐ Fácil comunicación y entrega rápida.", author: "Sheyla H." },
+    { text: "⭐⭐⭐⭐⭐ Excelente servicio y resultados visibles.", author: "Osvaldo Q." },
+    { text: "⭐⭐⭐⭐⭐ Muy profesional y confiable.", author: "Yessika H." },
+    { text: "⭐⭐⭐⭐⭐ Todo quedó como lo pedí.", author: "María T." },
+    { text: "⭐⭐⭐⭐⭐ Atención personalizada y muy amable.", author: "Carmen A." },
+    { text: "⭐⭐⭐⭐⭐ Los mejores en diseño web.", author: "Sheyla Q." }
+  ];
+
+  const container = document.getElementById('testimonials-container');
+
+  // Crear elementos automáticamente
+  reviews.forEach((r, index) => {
+    const div = document.createElement('div');
+    div.classList.add('testimonial');
+    if(index === 0) div.classList.add('active');
+    div.innerHTML = `${r.text} – <strong>${r.author}</strong>`;
+    container.appendChild(div);
+  });
+
+  const testimonials = document.querySelectorAll('.testimonial');
+  let current = 0;
+
+  function showNext() {
+    testimonials[current].classList.remove('active');
+    current = (current + 1) % testimonials.length;
+    testimonials[current].classList.add('active');
+  }
+
+  setInterval(showNext, 3000); // Cambia cada 3 segundos
+</script>
 
 <div class="plan" onclick="selectPlan('ZenSite Profesional')">
 <h2>ZenSite Profesional</h2>
@@ -224,4 +300,5 @@ showPage(3);
 </script>
 
 </body>
+
 </html>
